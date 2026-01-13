@@ -10,10 +10,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 export class App implements OnInit{
   private http = inject(HttpClient);
   protected readonly title = signal('Dating App');
+  protected members: any;
 
   ngOnInit(): void {
     this.http.get('https://localhost:5001/api/members').subscribe({
-      next: users => console.log(users),
+      next: users => this.members = users,
       error: err => console.error(err),
       complete: () => console.log('Request completed')
     });
